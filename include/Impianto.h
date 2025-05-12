@@ -7,14 +7,16 @@
 #include <ctime>
 
 class Impianto {
-public:
+private:
     int id;
     bool modalità;
     float frequenza;
     bool stato;
     time_t ora;
-    explicit Impianto(int id, bool mod, float frequenza, bool stato, time_t ora):id{id},modalità{mod},frequenza{frequenza},stato{stato},ora{ora}{}
 
+public:
+    explicit Impianto(int id, bool mod, float frequenza, bool stato, time_t ora);
+    int getId() const;
 };
 
 
