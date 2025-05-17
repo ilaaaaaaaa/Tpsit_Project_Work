@@ -9,4 +9,15 @@ add_executable(Tpsit_Project_Work main.cpp
         include/Serra.h
         src/Serra.cpp
         include/Time.h
-        src/Time.cpp)
+        src/Time.cpp
+        include/Tropicale.h
+        include/Desertica.h
+        include/Mediterranea.h
+        include/Alpina.h
+        include/Carnivora.h
+        src/Mediterranea.cpp
+        src/Alpina.cpp
+        src/Carnivora.cpp
+        src/Desertica.cpp
+        src/Tropicale.cpp
+)

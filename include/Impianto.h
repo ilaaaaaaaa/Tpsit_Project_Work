@@ -4,20 +4,24 @@
 
 #ifndef IMPIANTO_H
 #define IMPIANTO_H
+
 #include <ctime>
 
 class Impianto {
-private:
+protected:
     int id;
-    bool modalità;
+    bool modalita;
     float frequenza;
+    float temperatura;
     bool stato;
     time_t ora;
 
 public:
-    explicit Impianto(int id, bool mod, float frequenza, bool stato, time_t ora);
+    Impianto(int id, bool mod, float frequenza, float temperatura, bool stato, time_t ora);
     int getId() const;
 };
+
+
 
 
 #endif //IMPIANTO_H

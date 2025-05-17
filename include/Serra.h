@@ -5,4 +5,11 @@
 #ifndef SERRA_H
 #define SERRA_H
 
+class Serra {
+private:
+
+public:
+    explicit Serra();
+};
+
 #endif //SERRA_H
