@@ -23,7 +23,7 @@ public:
     void aggiornaImpianti(int orario);
 
     // Stampa lo stato di tutti gli impianti
-    void stampaStato() const;
+    void stampaStatoTutti();
 
     // Attiva/disattiva un impianto specifico per id
     void attivaImpianto(int id);

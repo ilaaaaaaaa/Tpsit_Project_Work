@@ -3,7 +3,7 @@
 //
 #include "../include/Serra.h"
 #include "../include/Impianto.h"
-
+#include <iostream>
 Impianto* Serra::aggiungiImpianto(Impianto* imp) {
     impianti.push_back(imp);
     return imp;
@@ -19,22 +19,9 @@ void Serra::aggiornaImpianti(int orario) {
 
 }
 
-void Serra::stampaStatoTutti() const {
-    for (const auto& [id, impianto] : impianti) {
-        std::cout << "Impianto ID " << id << ": ";
-        impianto->stampaStato();
-    }
-}
-
-void Serra::attivaAutomatici() {
-    for (auto& [id, impianto] : impianti) {
-        if (impianto->isAutomatico()) {
-            impianto->attiva();
-        }
-    }
-}
-
-std::shared_ptr<Impianto> Serra::getImpianto(int id) const {
-    auto it = impianti.find(id);
-    return (it != impianti.end()) ? it->second : nullptr;
+void Serra::stampaStatoTutti(){
+    //for (const auto& [id, impianto] : impianti) {
+      //  std::cout << "Impianto ID " << id << ": ";
+        //impianto->stampaStato();
+    //}
 }
