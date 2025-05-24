@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+using namespace std;
 
 void Time::SetTime (int hour, int minute) {
     if(hour<24&&minute<60) {
