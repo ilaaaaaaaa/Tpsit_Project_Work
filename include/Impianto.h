@@ -14,11 +14,22 @@ protected:
     float frequenza;
     float temperatura;
     bool stato;
-    time_t ora;
+    int IHour;
+    int IMinute;
+    int AHour;
+    int AMinute;
+    int SHour;
+    int SMinute;
 
 public:
-    Impianto(int id, bool mod, float frequenza, float temperatura, bool stato, time_t ora);
+
+    Impianto(int id, bool mod, float frequenza, float temperatura, bool stato, int hour, int minute, int ahour, int aminute, int shour, int sminute);
     int getId() const;
+    int getAHour() const;
+    int getAMinute() const;
+    int getSHour() const;
+    int getSMinute() const;
+    void Automatica();
 };
 
 

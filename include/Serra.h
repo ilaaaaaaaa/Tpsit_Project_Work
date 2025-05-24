@@ -1,15 +1,36 @@
-//
-// Created by ilame on 12/05/2025.
-//
-
 #ifndef SERRA_H
 #define SERRA_H
 
+#include <vector>
+#include "../include/Impianto.h" // Classe base astratta degli impianti
+
 class Serra {
 private:
+    std::vector<Impianto*> impianti;
 
 public:
-    explicit Serra();
+    // Costruttore e distruttore
+    Serra() = default;
+    ~Serra();
+
+    // Aggiunge un impianto (Serra assume la proprietà del puntatore)
+    Impianto* aggiungiImpianto(Impianto* impianto);
+
+    // Rimuove un impianto dato un id
+    Impianto* rimuoviImpianto(int id);
+
+    // Esegue l'aggiornamento di tutti gli impianti
+    void aggiornaImpianti(int orario);
+
+    // Stampa lo stato di tutti gli impianti
+    void stampaStato() const;
+
+    // Attiva/disattiva un impianto specifico per id
+    void attivaImpianto(int id);
+    void disattivaImpianto(int id);
+
+    // Ottiene un impianto per id (const)
+    Impianto* getImpianto(int id) const;
 };
 
-#endif //SERRA_H
+#endif // SERRA_H
