@@ -1,9 +1,14 @@
 //
-// Created by ilame on 12/05/2025.
+// Munaro Alex - Meggiolaro Ilaria
 //
+
 #include "../include/Serra.h"
 #include "../include/Impianto.h"
+
 #include <iostream>
+
+using namespace std;
+
 Impianto* Serra::aggiungiImpianto(Impianto* imp) {
     impianti.push_back(imp);
     return imp;

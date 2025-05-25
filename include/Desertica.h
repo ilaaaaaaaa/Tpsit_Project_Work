@@ -1,5 +1,5 @@
 //
-// Created by ilame on 17/05/2025.
+// Meggiolaro Ilaria
 //
 
 #ifndef DESERTICA_H
@@ -9,7 +9,11 @@
 
 class Desertica: public Impianto {
 public:
-    Desertica(int id = 1004, bool mod = true, float frequenza, float temperatura, bool stato = false, time_t ora = time(0));
+    Desertica(int id = 1004, bool mod = true, float frequenza = 2.0f, float temperatura, bool stato = false,
+              int hour = 0, int minute = 0,
+              int ahour = 0, int aminute = 0,
+              int shour = 0, int sminute = 0);
 };
 
 #endif //DESERTICA_H
+

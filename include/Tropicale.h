@@ -1,5 +1,5 @@
 //
-// Created by ilame on 17/05/2025.
+// Meggiolaro Ilaria
 //
 
 #ifndef TROPICALE_H
@@ -9,7 +9,10 @@
 
 class Tropicale : public Impianto {
 public:
-    Tropicale(int id = 1002, bool mod = true, float frequenza = 2.5f, bool stato = false, time_t ora = time(0));
+    Tropicale(int id = 1002, bool mod = true, float frequenza = 2.5f, float temperatura, bool stato = false,
+              int hour = 0, int minute = 0,
+              int ahour = 0, int aminute = 0,
+              int shour = 0, int sminute = 0);
 };
 
-#endif //TROPICALE_H
+#endif // TROPICALE_H

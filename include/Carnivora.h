@@ -1,5 +1,5 @@
 //
-// Created by ilame on 17/05/2025.
+// Rossi Samuele
 //
 
 #ifndef CARNIVORA_H
@@ -9,8 +9,11 @@
 
 class Carnivora: public Impianto {
 public:
-    Carnivora(int id = 1005, bool mod = false, float frequenza = 1.5f, float temperatura, bool stato = false, time_t ora = time(0));
+    Carnivora(int id = 1005, bool mod = false, float frequenza = 1.5f, float temperatura, bool stato = false,
+              int hour = 0, int minute = 0,
+              int ahour = 0, int aminute = 0,
+              int shour = 0, int sminute = 0);
 };
 
-
 #endif //CARNIVORA_H
+

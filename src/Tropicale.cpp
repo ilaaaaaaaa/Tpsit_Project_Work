@@ -1,7 +1,11 @@
 //
-// Created by ilame on 17/05/2025.
+// Meggiolaro Ilaria
 //
 
 #include "../include/Tropicale.h"
 
-Tropicale::Tropicale(int id, bool mod, float frequenza, bool stato, time_t ora): Impianto(id, mod, frequenza, 30.0f, stato, ora) {}
+Tropicale::Tropicale(int id, bool mod, float frequenza, float temperatura, bool stato,
+                     int hour, int minute,
+                     int ahour, int aminute,
+                     int shour, int sminute)
+    : Impianto(id, mod, frequenza, temperatura, stato, hour, minute, ahour, aminute, shour, sminute) {}

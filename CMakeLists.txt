@@ -20,4 +20,6 @@ add_executable(Tpsit_Project_Work main.cpp
         src/Carnivora.cpp
         src/Desertica.cpp
         src/Tropicale.cpp
+        include/CommandParse.h
+        src/CommandParse.cpp
 )

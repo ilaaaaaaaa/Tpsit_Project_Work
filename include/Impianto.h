@@ -1,11 +1,13 @@
 //
-// Created by ilame on 10/05/2025.
+// Rossi Samuele
 //
 
 #ifndef IMPIANTO_H
 #define IMPIANTO_H
 
-#include <ctime>
+#include <iostream>
+
+using namespace std;
 
 class Impianto {
 protected:
