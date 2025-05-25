@@ -4,6 +4,7 @@
 
 #include "../include/Serra.h"
 #include "../include/Impianto.h"
+#include "../include/Time.h"
 
 #include <iostream>
 
@@ -20,13 +21,40 @@ Impianto* Serra::rimuoviImpianto(int id) {
     return temp;
 }
 
-void Serra::aggiornaImpianti(int orario) {
-
+void Serra::aggiornaImpianti(int hour, int minute) {
+    time.AdvanceTime(hour, minute, impianti);
 }
 
 void Serra::stampaStatoTutti(){
-    //for (const auto& [id, impianto] : impianti) {
-      //  std::cout << "Impianto ID " << id << ": ";
-        //impianto->stampaStato();
-    //}
+    for(auto i : impianti) {
+        i->Stampa();
+    }
 }
+
+void Serra::stampaStato(int id){
+    for(auto i : impianti) {
+        if(id==i->getId()) {
+            i->Stampa();
+            return;
+        }
+    }
+}
+
+void Serra::attivaImpianto(int id) {
+    for(auto i : impianti) {
+        if(id==i->getId()) {
+            i->Attiva();
+            return;
+        }
+    }
+}
+
+void Serra::disattivaImpianto(int id) {
+    for(auto i : impianti) {
+        if(id==i->getId()) {
+            i->Disattiva();
+            return;
+        }
+    }
+}
+

@@ -38,3 +38,28 @@ void Impianto::Automatica(){
             cout << "L'impianto " << id << "è spento" << std::endl;
     }
 }
+
+void Impianto::Attiva() {
+    if(!stato) {
+        cout << "L'impianto " << id << "è acceso" << std::endl;
+        stato = true;
+    }
+    else
+        cout << "L'impianto " << id << "è gia' attivo" << std::endl;
+}
+
+void Impianto::Disattiva() {
+    if(stato) {
+        cout << "L'impianto " << id << "è spento" << std::endl;
+        stato = false;
+    }
+    else
+        cout << "L'impianto " << id << "è gia' spento" << std::endl;
+}
+
+void Impianto::Stampa() {
+    if(stato)
+        cout << "L'impianto " << id << "è acceso" << std::endl;
+    else
+        cout << "L'impianto " << id << "è spento" << std::endl;
+}

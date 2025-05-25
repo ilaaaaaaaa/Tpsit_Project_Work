@@ -32,6 +32,9 @@ public:
     int getSHour() const;
     int getSMinute() const;
     void Automatica();
+    void Attiva();
+    void Disattiva();
+    void Stampa();
 };
 
 

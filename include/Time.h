@@ -23,6 +23,7 @@ public:
     string toString() const;
     void setFromString(const string& timeStr);
 
+
     //getter
     int getHour() const { return Hour; }
     int getMinute() const { return Minute; }
