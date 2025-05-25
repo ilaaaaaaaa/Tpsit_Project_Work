@@ -2,7 +2,10 @@
 // Meggiolaro Ilaria
 //
 
-#include "..\include\CommandParse.h"
+#include "../include/CommandParse.h"
+#include "../include/Time.h"
+#include "../include/Serra.h"
+#include "../include/Impianto.h"
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -11,8 +14,7 @@
 
 using namespace std;
 
-Time now; //Variabile globale simulata per l’orario corrente
-
+// Funzione di logging con orario
 void logMessage(const Time& time, const string& message, const int& errorLevel) {
     if (errorLevel == 0)
         cout << "[" << time.toString() << "]\t" << message << endl;
@@ -20,6 +22,7 @@ void logMessage(const Time& time, const string& message, const int& errorLevel) 
         cerr << "[" << time.toString() << "]\t" << message << endl;
 }
 
+// Parsing del comando in token
 vector<string> commandParser(const string& command) {
     vector<string> tokens;
     istringstream ss(command);
@@ -62,7 +65,8 @@ vector<string> commandParser(const string& command) {
     return tokens;
 }
 
-void processCommand(const string& command) {
+// Funzione principale per il processamento dei comandi
+void processCommand(const string& command, Time& now, Serra& serra) {
     logMessage(now, "L'orario attuale è " + now.toString(), 0);
     vector<string> tokens = commandParser(command);
 
@@ -83,9 +87,8 @@ void processCommand(const string& command) {
             if (tokens.size() != 3) {
                 throw invalid_argument("Errore: formato per 'set time' non valido. Usa: set time HH:MM");
             }
-            Time time;
-            time.setFromString(tokens[2]);
-            now = time;
+            now.setFromString(tokens[2]);
+
         } else {
             if (tokens.size() < 3) {
                 throw invalid_argument("Errore: comando 'set' incompleto per dispositivo.");
@@ -93,36 +96,79 @@ void processCommand(const string& command) {
 
             const string& operation = tokens[2];
 
-            if (operation == "on") {
-                // accendi dispositivo
-            } else if (operation == "off") {
-                // spegni dispositivo
-            } else {
-                Time start;
-                start.setFromString(operation);
-                if (tokens.size() == 4) {
-                    Time stop;
-                    stop.setFromString(tokens[3]);
-                    // imposta timer start e stop per deviceName
+            try {
+                int id = stoi(deviceName);
+
+                if (operation == "on") {
+                    serra.attivaImpianto(id);
+
+                } else if (operation == "off") {
+                    serra.disattivaImpianto(id);
+
                 } else {
-                    // imposta timer start per deviceName
+                    Time start, stop;
+                    start.setFromString(operation);
+
+                    if (tokens.size() == 4) {
+                        stop.setFromString(tokens[3]);
+                        for (auto imp : serra.getImpianti()) {
+                            if (imp->getId() == id) {
+                                imp->setStart(start);
+                                imp->setStop(stop);
+                                break;
+                            }
+                        }
+                    } else {
+                        for (auto imp : serra.getImpianti()) {
+                            if (imp->getId() == id) {
+                                imp->setStart(start);
+                                break;
+                            }
+                        }
+                    }
                 }
+
+            } catch (...) {
+                throw invalid_argument("Errore: ID dispositivo non valido.");
             }
         }
 
     } else if (action == "rm") {
         if (tokens.size() != 2) {
-            throw invalid_argument("Errore: comando 'rm' non valido. Usa: rm ${DEVICENAME}");
+            throw invalid_argument("Errore: comando 'rm' non valido. Usa: rm ${ID}");
         }
-        // rimuovi timer da deviceName
+
+        try {
+            int id = stoi(tokens[1]);
+            for (auto imp : serra.getImpianti()) {
+                if (imp->getId() == id) {
+                    Time zero;
+                    zero.SetTime(0, 0);
+                    imp->setStart(zero);
+                    imp->setStop(zero);
+                    logMessage(now, "Timer rimosso da impianto " + to_string(id), 0);
+                    break;
+                }
+            }
+
+        } catch (...) {
+            throw invalid_argument("Errore: ID non valido.");
+        }
 
     } else if (action == "show") {
         if (tokens.size() == 1) {
-            // mostra tutti i dispositivi
+            serra.stampaStatoTutti();
+
         } else if (tokens.size() == 2) {
-            // mostra singolo dispositivo
+            try {
+                int id = stoi(tokens[1]);
+                serra.stampaStato(id);
+            } catch (...) {
+                throw invalid_argument("Errore: ID dispositivo non valido.");
+            }
+
         } else {
-            throw invalid_argument("Errore: comando 'show' non valido. Usa: show oppure show ${DEVICENAME}");
+            throw invalid_argument("Errore: comando 'show' non valido. Usa: show oppure show ${ID}");
         }
 
     } else if (action == "reset") {
@@ -132,11 +178,21 @@ void processCommand(const string& command) {
 
         const string& resetType = tokens[1];
         if (resetType == "time") {
-            // resetta orario
-        } else if (resetType == "timers") {
-            // resetta tutti i timer
-        } else if (resetType == "all") {
-            // resetta orario e timer
+            now.SetTime(0, 0);
+
+        } else if (resetType == "timers" || resetType == "all") {
+            Time zero;
+            zero.SetTime(0, 0);
+
+            for (auto imp : serra.getImpianti()) {
+                imp->setStart(zero);
+                imp->setStop(zero);
+            }
+
+            if (resetType == "all") {
+                now.SetTime(0, 0);
+            }
+
         } else {
             throw invalid_argument("Errore: opzione 'reset' non valida. Usa: reset time | reset timers | reset all");
         }

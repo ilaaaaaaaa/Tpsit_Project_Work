@@ -4,8 +4,9 @@
 
 #include "../include/Carnivora.h"
 
-Carnivora::Carnivora(int id, bool mod, float frequenza, float temperatura, bool stato,
+//Costruttore
+Carnivora::Carnivora(float temperatura, int id, bool mod, float frequenza, bool stato,
                      int hour, int minute,
                      int ahour, int aminute,
                      int shour, int sminute)
-    : Impianto(id, mod, frequenza, temperatura, stato, hour, minute, ahour, aminute, shour, sminute) {}
+: Impianto(id, mod, frequenza, temperatura, stato, hour, minute, ahour, aminute, shour, sminute){}

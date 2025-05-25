@@ -7,13 +7,15 @@
 
 using namespace std;
 
+//Costruttore
 Mediterranea::Mediterranea(int id, bool mod, float frequenza, bool stato,
                            int hour, int minute,
                            int ahour, int aminute,
                            int shour, int sminute)
-    : Impianto(id, mod, frequenza, 28.0f, stato, hour, minute, ahour, aminute, shour, sminute) {
-}
+: Impianto(id, mod, frequenza, 28.0f, stato, hour, minute, ahour, aminute, shour, sminute)
+{}
 
+//Metodo per l'aggiornamento della temperatura
 void Mediterranea::aggiornaTemperatura() {
     static bool randomInitialized = false;
     if (!randomInitialized) {
